@@ -1,15 +1,13 @@
---don't forget to choose the database you want in available databases
+--Don't forget to choose the database you want in available databases
 CREATE TABLE #TableNameTypeRowCounts 
 (Id INT IDENTITY(1,1), TableName NVARCHAR(200), TableType NVARCHAR(10), RowCounts INT )
 INSERT INTO #TableNameTypeRowCounts
 SELECT T.TABLE_NAME, T.TABLE_TYPE, NULL FROM INFORMATION_SCHEMA.TABLES T
-
 DECLARE @I AS INT=1
 DECLARE @LastRow AS INT= (SELECT COUNT(*) FROM #TableNameTypeRowCounts)
 DECLARE @TableName AS NVARCHAR(200)
 DECLARE @Query as NVARCHAR(300)
 DECLARE @RowCounts AS INT
-
 WHILE @I<=@LastRow
 BEGIN	
 	DROP TABLE #TableRow
@@ -27,5 +25,4 @@ BEGIN
 	END CATCH
 SET @I=@I+1	
 END
-
 SELECT * FROM #TableNameTypeRowCounts
